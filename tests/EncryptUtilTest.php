@@ -20,13 +20,12 @@ final class EncryptUtilTest extends TestCase
      * @dataProvider dataProviderTestE
      * @param String $data       Plaintext data to encrypt
      * @param String $password   Password
-     * @param String $salt       Salt for password
      * @throws Exception
      * @return Cipher
      */
-    public function testE(String $data, String $password, String $salt)
+    public function testE(String $data, String $password)
     {
-        $cipher = EncryptUtil::e($data, $password, $salt);
+        $cipher = EncryptUtil::e($data, $password);
         self::assertInstanceOf(Cipher::class, $cipher);
         self::assertFalse(openssl_error_string());
         return $cipher;
@@ -38,12 +37,11 @@ final class EncryptUtilTest extends TestCase
      * @dataProvider dataProviderTestE
      * @param String $data       Plaintext data to encrypt
      * @param String $password   Password
-     * @param String $salt       Salt for password
      * @throws Exception
      */
-    public function testD(String $data, String $password, String $salt)
+    public function testD(String $data, String $password)
     {
-        $cipher = $this->testE($data, $password, $salt);
+        $cipher = $this->testE($data, $password);
         self::assertEquals($data, EncryptUtil::d($cipher->rawString(), $password));
     }
 
@@ -55,7 +53,7 @@ final class EncryptUtilTest extends TestCase
     public function dataProviderTestE()
     {
         return [
-            ['Some nice data', 'Some nice password', random_bytes(32)],
+            ['Some nice data', 'Some nice password'],
         ];
     }
 }
