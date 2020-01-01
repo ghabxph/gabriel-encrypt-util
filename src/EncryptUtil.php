@@ -14,14 +14,14 @@ class EncryptUtil
      *
      * @param String $data       Data to encrypt
      * @param String $password   Password used for encrypting the data
-     * @param String $salt       Salt of $password for PBKDF2
      * @return Cipher
      * @throws \Exception
      */
-    public static function e($data, $password, $salt)
+    public static function e($data, $password)
     {
         $method = 'aes-256-cbc';
         $options = OPENSSL_RAW_DATA;
+        $salt = random_bytes(32);
         $password = hash_pbkdf2('sha256', $password, $salt, 100000, 32, true);
         $iv = random_bytes(openssl_cipher_iv_length($method));
         return new Cipher(openssl_encrypt($data, $method, $password, $options, $iv), $iv, $salt);
