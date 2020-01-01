@@ -1,0 +1,17 @@
+version: "3.6"
+
+services:
+  composer:
+    image: composer:latest
+    user: 1000:1000
+    volumes:
+      - ./:/app
+      - /root/.composer-1000:/tmp
+    command: "install -vvv --ignore-platform-reqs"
+
+  phpunit:
+    build: .
+    user: 1000:1000
+    volumes:
+      - ./:/app
+    command: -c phpunit.xml

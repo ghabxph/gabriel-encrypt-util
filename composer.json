@@ -1,0 +1,24 @@
+{
+    "name": "gabriel/encrypt-util",
+    "type": "library",
+    "description": "Encrypt Utility",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Gabriel Lucernas Pascual",
+            "email": "11975597+ghabxph@users.noreply.github.com"
+        }
+    ],
+     "autoload": {
+        "psr-4": {
+            "Gabriel\\EncryptUtil\\": "src"
+        }
+    },
+  "require": {
+    "ext-http": "*",
+    "ext-openssl": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^8"
+  }
+}
